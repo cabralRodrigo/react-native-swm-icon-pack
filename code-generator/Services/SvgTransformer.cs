@@ -11,18 +11,14 @@ namespace CodeGenerator.Services;
 internal class SvgTransformer : ISvgTransformer
 {
     private readonly Dictionary<string, JavascriptType> tagTransformers;
-    private readonly Dictionary<string, string[]> attributeExcludeList;
-    private readonly Dictionary<string, IReadOnlyDictionary<string, (string Prop, JavascriptType Type)>> attributePropExtractors;
+    private readonly ISvgAttributeTransformer[] attributeTransformers;
 
-    public SvgTransformer(ISvgTagTransformer[] tagTransformers, IAttributeExcludeList[] attributeExcludeLists, IAttributePropExtractor[] attributePropExtractors)
+    public SvgTransformer(ISvgTagTransformer[] tagTransformers, ISvgAttributeTransformer[] attributeTransformers)
     {
         ArgumentNullException.ThrowIfNull(tagTransformers);
-        ArgumentNullException.ThrowIfNull(attributeExcludeLists);
-        ArgumentNullException.ThrowIfNull(attributePropExtractors);
 
         this.tagTransformers = tagTransformers.ToDictionary(s => s.Original, s => s.Transformed);
-        this.attributeExcludeList = attributeExcludeLists.ToDictionary(s => s.Tag, s => s.Attributes);
-        this.attributePropExtractors = attributePropExtractors.ToDictionary(s => s.Tag, s => s.AttributesProps);
+        this.attributeTransformers = attributeTransformers ?? throw new ArgumentNullException(nameof(attributeTransformers));
     }
 
     public IconNode TransformSvg(string svg)
@@ -41,18 +37,22 @@ internal class SvgTransformer : ISvgTransformer
 
     private IEnumerable<IconNodeAttribute> TransformAttributes(JavascriptType tag, Element element)
     {
-        this.attributeExcludeList.TryGetValue(tag.Name, out var attributeExcludeList);
-        this.attributePropExtractors.TryGetValue(tag.Name, out var propExtractors);
-
         foreach (var attribute in element.Attributes)
         {
-            if (attributeExcludeList?.Contains(attribute.Name) == true)
-                continue;
+            foreach (var attributeTransformer in this.attributeTransformers)
+            {
+                if (!attributeTransformer.CanTransform(element, attribute))
+                    continue;
 
-            if (propExtractors?.TryGetValue(attribute.Name, out var prop) == true)
-                yield return new(attribute.Name, new IconNodeAttributeValueProp(prop.Prop, prop.Type));
-            else
-                yield return new(attribute.Name, new IconNodeAttributeValueLiteral(attribute.Value));
+                var nodeAttribute = attributeTransformer.Tranform(element, attribute);
+                if (nodeAttribute is not null)
+                    yield return nodeAttribute;
+
+                goto next;
+            }
+
+            throw new Exception($"Transformer not found for attribute '{attribute.Name}' of element tag '{element.TagName}'.");
+        next:;
         }
     }
 }

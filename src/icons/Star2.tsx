@@ -2,10 +2,10 @@ import React, { VFC } from 'react';
 import { Color, G, Path } from 'react-native-svg';
 import { createIcon } from '../helpers';
 
-type BrokenProps = { strokeColor: Color, strokeWidth: number, };
-type CurvedProps = { strokeColor: Color, strokeWidth: number, };
-type DuotoneProps = { fillColor: Color, strokeColor: Color, strokeWidth: number, };
-type OutlineProps = { strokeColor: Color, strokeWidth: number, };
+type BrokenProps = { color: Color, strokeWidth: number, };
+type CurvedProps = { color: Color, strokeWidth: number, };
+type DuotoneProps = { color: Color, strokeWidth: number, };
+type OutlineProps = { color: Color, strokeWidth: number, };
 
 type Star2Props = 
     { variant: 'broken' } & BrokenProps |
@@ -15,26 +15,26 @@ type Star2Props =
 
 const Broken: VFC<BrokenProps> = (props) => (
     <G>
-        <Path d="M12 3C12 7.97056 16.0294 12 21 12C16.0294 12 12 16.0294 12 21C12 16.0294 7.97056 12 3 12C5.6655 12 8.06036 10.8412 9.70832 9" stroke={props.strokeColor} stroke-width={props.strokeWidth} stroke-linecap="round" stroke-linejoin="round" />
+        <Path d="M12 3C12 7.97056 16.0294 12 21 12C16.0294 12 12 16.0294 12 21C12 16.0294 7.97056 12 3 12C5.6655 12 8.06036 10.8412 9.70832 9" stroke={props.color} strokeWidth={props.strokeWidth} strokeLinecap="round" strokeLinejoin="round" />
     </G>
 );
 
 const Curved: VFC<CurvedProps> = (props) => (
     <G>
-        <Path d="M12 3C12 7.97056 16.0294 12 21 12C16.0294 12 12 16.0294 12 21C12 16.0294 7.97056 12 3 12C7.97056 12 12 7.97056 12 3Z" stroke={props.strokeColor} stroke-width={props.strokeWidth} stroke-linecap="round" stroke-linejoin="round" />
+        <Path d="M12 3C12 7.97056 16.0294 12 21 12C16.0294 12 12 16.0294 12 21C12 16.0294 7.97056 12 3 12C7.97056 12 12 7.97056 12 3Z" stroke={props.color} strokeWidth={props.strokeWidth} strokeLinecap="round" strokeLinejoin="round" />
     </G>
 );
 
 const Duotone: VFC<DuotoneProps> = (props) => (
     <G>
-        <Path opacity="0.15" d="M12 3C12 7.97056 16.0294 12 21 12C16.0294 12 12 16.0294 12 21C12 16.0294 7.97056 12 3 12C7.97056 12 12 7.97056 12 3Z" fill={props.fillColor} />
-        <Path d="M12 3C12 7.97056 16.0294 12 21 12C16.0294 12 12 16.0294 12 21C12 16.0294 7.97056 12 3 12C7.97056 12 12 7.97056 12 3Z" stroke={props.strokeColor} stroke-width={props.strokeWidth} stroke-linecap="round" stroke-linejoin="round" />
+        <Path opacity="0.15" d="M12 3C12 7.97056 16.0294 12 21 12C16.0294 12 12 16.0294 12 21C12 16.0294 7.97056 12 3 12C7.97056 12 12 7.97056 12 3Z" fill={props.color} />
+        <Path d="M12 3C12 7.97056 16.0294 12 21 12C16.0294 12 12 16.0294 12 21C12 16.0294 7.97056 12 3 12C7.97056 12 12 7.97056 12 3Z" stroke={props.color} strokeWidth={props.strokeWidth} strokeLinecap="round" strokeLinejoin="round" />
     </G>
 );
 
 const Outline: VFC<OutlineProps> = (props) => (
     <G>
-        <Path d="M12 3C12 7.97056 16.0294 12 21 12C16.0294 12 12 16.0294 12 21C12 16.0294 7.97056 12 3 12C7.97056 12 12 7.97056 12 3Z" stroke={props.strokeColor} stroke-width={props.strokeWidth} stroke-linecap="round" stroke-linejoin="round" />
+        <Path d="M12 3C12 7.97056 16.0294 12 21 12C16.0294 12 12 16.0294 12 21C12 16.0294 7.97056 12 3 12C7.97056 12 12 7.97056 12 3Z" stroke={props.color} strokeWidth={props.strokeWidth} strokeLinecap="round" strokeLinejoin="round" />
     </G>
 );
 

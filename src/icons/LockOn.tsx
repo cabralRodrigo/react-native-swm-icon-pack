@@ -2,10 +2,10 @@ import React, { VFC } from 'react';
 import { Color, G, Path } from 'react-native-svg';
 import { createIcon } from '../helpers';
 
-type BrokenProps = { strokeColor: Color, strokeWidth: number, };
-type CurvedProps = { strokeColor: Color, strokeWidth: number, };
-type DuotoneProps = { fillColor: Color, strokeColor: Color, strokeWidth: number, };
-type OutlineProps = { strokeColor: Color, strokeWidth: number, };
+type BrokenProps = { color: Color, strokeWidth: number, };
+type CurvedProps = { color: Color, strokeWidth: number, };
+type DuotoneProps = { color: Color, strokeWidth: number, };
+type OutlineProps = { color: Color, strokeWidth: number, };
 
 type LockOnProps = 
     { variant: 'broken' } & BrokenProps |
@@ -15,30 +15,30 @@ type LockOnProps =
 
 const Broken: VFC<BrokenProps> = (props) => (
     <G>
-        <Path d="M8 11V7C8 5.66667 8.8 3 12 3C15.2 3 16 5.66667 16 7V11" stroke={props.strokeColor} stroke-width={props.strokeWidth} stroke-linecap="round" stroke-linejoin="round" />
-        <Path d="M12 21H5V11H8H16H19V21H17" stroke={props.strokeColor} stroke-width={props.strokeWidth} stroke-linecap="round" stroke-linejoin="round" />
+        <Path d="M8 11V7C8 5.66667 8.8 3 12 3C15.2 3 16 5.66667 16 7V11" stroke={props.color} strokeWidth={props.strokeWidth} strokeLinecap="round" strokeLinejoin="round" />
+        <Path d="M12 21H5V11H8H16H19V21H17" stroke={props.color} strokeWidth={props.strokeWidth} strokeLinecap="round" strokeLinejoin="round" />
     </G>
 );
 
 const Curved: VFC<CurvedProps> = (props) => (
     <G>
-        <Path d="M16 10.4298V7C16 4.79086 14.2091 3 12 3C9.79086 3 8 4.79086 8 7V10.4298" stroke={props.strokeColor} stroke-width={props.strokeWidth} stroke-linecap="round" stroke-linejoin="round" />
-        <Path d="M12 10C10.3247 10 9.01243 10.1268 8 10.4298C5.77744 11.0952 5 12.6104 5 15.5C5 19.7059 6.64706 21 12 21C17.3529 21 19 19.7059 19 15.5C19 12.6104 18.2226 11.0952 16 10.4298C14.9876 10.1268 13.6753 10 12 10Z" stroke={props.strokeColor} stroke-width={props.strokeWidth} stroke-linecap="round" stroke-linejoin="round" />
+        <Path d="M16 10.4298V7C16 4.79086 14.2091 3 12 3C9.79086 3 8 4.79086 8 7V10.4298" stroke={props.color} strokeWidth={props.strokeWidth} strokeLinecap="round" strokeLinejoin="round" />
+        <Path d="M12 10C10.3247 10 9.01243 10.1268 8 10.4298C5.77744 11.0952 5 12.6104 5 15.5C5 19.7059 6.64706 21 12 21C17.3529 21 19 19.7059 19 15.5C19 12.6104 18.2226 11.0952 16 10.4298C14.9876 10.1268 13.6753 10 12 10Z" stroke={props.color} strokeWidth={props.strokeWidth} strokeLinecap="round" strokeLinejoin="round" />
     </G>
 );
 
 const Duotone: VFC<DuotoneProps> = (props) => (
     <G>
-        <Path opacity="0.15" d="M5 11H19V21H5V11Z" fill={props.fillColor} />
-        <Path d="M8 11V7C8 5.66667 8.8 3 12 3C15.2 3 16 5.66667 16 7V11" stroke={props.strokeColor} stroke-width={props.strokeWidth} stroke-linecap="round" stroke-linejoin="round" />
-        <Path d="M19 21H5V11H8H16H19V21Z" stroke={props.strokeColor} stroke-width={props.strokeWidth} stroke-linecap="round" stroke-linejoin="round" />
+        <Path opacity="0.15" d="M5 11H19V21H5V11Z" fill={props.color} />
+        <Path d="M8 11V7C8 5.66667 8.8 3 12 3C15.2 3 16 5.66667 16 7V11" stroke={props.color} strokeWidth={props.strokeWidth} strokeLinecap="round" strokeLinejoin="round" />
+        <Path d="M19 21H5V11H8H16H19V21Z" stroke={props.color} strokeWidth={props.strokeWidth} strokeLinecap="round" strokeLinejoin="round" />
     </G>
 );
 
 const Outline: VFC<OutlineProps> = (props) => (
     <G>
-        <Path d="M8 11V7C8 5.66667 8.8 3 12 3C15.2 3 16 5.66667 16 7V11" stroke={props.strokeColor} stroke-width={props.strokeWidth} stroke-linecap="round" stroke-linejoin="round" />
-        <Path d="M19 21H5V11H8H16H19V21Z" stroke={props.strokeColor} stroke-width={props.strokeWidth} stroke-linecap="round" stroke-linejoin="round" />
+        <Path d="M8 11V7C8 5.66667 8.8 3 12 3C15.2 3 16 5.66667 16 7V11" stroke={props.color} strokeWidth={props.strokeWidth} strokeLinecap="round" strokeLinejoin="round" />
+        <Path d="M19 21H5V11H8H16H19V21Z" stroke={props.color} strokeWidth={props.strokeWidth} strokeLinecap="round" strokeLinejoin="round" />
     </G>
 );
 
