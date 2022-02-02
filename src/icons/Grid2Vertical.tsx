@@ -1,35 +1,53 @@
 import React, { VFC } from 'react';
-import { Color, Path } from 'react-native-svg';
+import { Color, G, Path } from 'react-native-svg';
 import { createIcon } from '../helpers';
 
-type BrokenProps = { fillColor: Color, };
-type DuotoneProps = { fillColor: Color, };
-type OutlineProps = { fillColor: Color, };
+type BrokenProps = { strokeColor: Color, strokeWidth: number, };
+type CurvedProps = { strokeColor: Color, strokeWidth: number, };
+type DuotoneProps = { fillColor: Color, strokeColor: Color, strokeWidth: number, };
+type OutlineProps = { strokeColor: Color, strokeWidth: number, };
 
 type Grid2VerticalProps = 
     { variant: 'broken' } & BrokenProps |
+    { variant: 'curved' } & CurvedProps |
     { variant: 'duotone' } & DuotoneProps |
     { variant: 'outline' } & OutlineProps;
 
 const Broken: VFC<BrokenProps> = (props) => (
-    <Path d="M3.5 3.5V2.75C3.08579 2.75 2.75 3.08579 2.75 3.5H3.5ZM10.5 3.5H11.25C11.25 3.08579 10.9142 2.75 10.5 2.75V3.5ZM10.5 20.5V21.25C10.9142 21.25 11.25 20.9142 11.25 20.5H10.5ZM3.5 20.5H2.75C2.75 20.9142 3.08579 21.25 3.5 21.25V20.5ZM2.75 13C2.75 13.4142 3.08579 13.75 3.5 13.75C3.91421 13.75 4.25 13.4142 4.25 13H2.75ZM4.25 18C4.25 17.5858 3.91421 17.25 3.5 17.25C3.08579 17.25 2.75 17.5858 2.75 18H4.25ZM13.5 3.5V2.75C13.0858 2.75 12.75 3.08579 12.75 3.5H13.5ZM20.5 3.5H21.25C21.25 3.08579 20.9142 2.75 20.5 2.75V3.5ZM20.5 20.5V21.25C20.9142 21.25 21.25 20.9142 21.25 20.5H20.5ZM13.5 20.5H12.75C12.75 20.9142 13.0858 21.25 13.5 21.25V20.5ZM19.75 6C19.75 6.41421 20.0858 6.75 20.5 6.75C20.9142 6.75 21.25 6.41421 21.25 6H19.75ZM21.25 11C21.25 10.5858 20.9142 10.25 20.5 10.25C20.0858 10.25 19.75 10.5858 19.75 11H21.25ZM3.5 4.25H10.5V2.75H3.5V4.25ZM9.75 3.5V20.5H11.25V3.5H9.75ZM10.5 19.75H3.5V21.25H10.5V19.75ZM4.25 13V3.5H2.75V13H4.25ZM4.25 20.5V18H2.75V20.5H4.25ZM13.5 4.25H20.5V2.75H13.5V4.25ZM20.5 19.75H13.5V21.25H20.5V19.75ZM14.25 20.5V3.5H12.75V20.5H14.25ZM19.75 3.5V6H21.25V3.5H19.75ZM19.75 11V20.5H21.25V11H19.75Z" fill={props.fillColor} />
+    <G>
+        <Path d="M3.5 13V3.5H10.5V20.5H3.5V18" stroke={props.strokeColor} stroke-width={props.strokeWidth} stroke-linecap="round" stroke-linejoin="round" />
+        <Path d="M20.5 6V3.5H13.5V20.5H20.5V11" stroke={props.strokeColor} stroke-width={props.strokeWidth} stroke-linecap="round" stroke-linejoin="round" />
+    </G>
+);
+
+const Curved: VFC<CurvedProps> = (props) => (
+    <G>
+        <Path d="M6.5 3C4.94444 3 3.58333 3.5 3.38889 4C3.19444 4.5 3 8 3 12C3 16 3.19444 19.5 3.38889 20C3.58333 20.5 4.94444 21 6.5 21C8.05556 21 9.41667 20.5 9.61111 20C9.80556 19.5 10 16 10 12C10 8 9.80556 4.5 9.61111 4C9.41667 3.5 8.05556 3 6.5 3Z" stroke={props.strokeColor} stroke-width={props.strokeWidth} stroke-linecap="round" stroke-linejoin="round" />
+        <Path d="M17.5 3C15.9444 3 14.5833 3.5 14.3889 4C14.1944 4.5 14 8 14 12C14 16 14.1944 19.5 14.3889 20C14.5833 20.5 15.9444 21 17.5 21C19.0556 21 20.4167 20.5 20.6111 20C20.8056 19.5 21 16 21 12C21 8 20.8056 4.5 20.6111 4C20.4167 3.5 19.0556 3 17.5 3Z" stroke={props.strokeColor} stroke-width={props.strokeWidth} stroke-linecap="round" stroke-linejoin="round" />
+    </G>
 );
 
 const Duotone: VFC<DuotoneProps> = (props) => (
-    <>
+    <G>
         <Path opacity="0.15" d="M13.5 3.5H20.5V20.5H13.5V3.5Z" fill={props.fillColor} />
-        <Path d="M3.5 3.5V2.75C3.08579 2.75 2.75 3.08579 2.75 3.5H3.5ZM10.5 3.5H11.25C11.25 3.08579 10.9142 2.75 10.5 2.75V3.5ZM10.5 20.5V21.25C10.9142 21.25 11.25 20.9142 11.25 20.5H10.5ZM3.5 20.5H2.75C2.75 20.9142 3.08579 21.25 3.5 21.25V20.5ZM13.5 3.5V2.75C13.0858 2.75 12.75 3.08579 12.75 3.5H13.5ZM20.5 3.5H21.25C21.25 3.08579 20.9142 2.75 20.5 2.75V3.5ZM20.5 20.5V21.25C20.9142 21.25 21.25 20.9142 21.25 20.5H20.5ZM13.5 20.5H12.75C12.75 20.9142 13.0858 21.25 13.5 21.25V20.5ZM3.5 4.25H10.5V2.75H3.5V4.25ZM9.75 3.5V20.5H11.25V3.5H9.75ZM10.5 19.75H3.5V21.25H10.5V19.75ZM4.25 20.5V3.5H2.75V20.5H4.25ZM13.5 4.25H20.5V2.75H13.5V4.25ZM19.75 3.5V20.5H21.25V3.5H19.75ZM20.5 19.75H13.5V21.25H20.5V19.75ZM14.25 20.5V3.5H12.75V20.5H14.25Z" fill={props.fillColor} />
-    </>
+        <Path d="M3.5 3.5H10.5V20.5H3.5V3.5Z" stroke={props.strokeColor} stroke-width={props.strokeWidth} stroke-linecap="round" stroke-linejoin="round" />
+        <Path d="M13.5 3.5H20.5V20.5H13.5V3.5Z" stroke={props.strokeColor} stroke-width={props.strokeWidth} stroke-linecap="round" stroke-linejoin="round" />
+    </G>
 );
 
 const Outline: VFC<OutlineProps> = (props) => (
-    <Path d="M3.5 3.5V2.75C3.08579 2.75 2.75 3.08579 2.75 3.5H3.5ZM10.5 3.5H11.25C11.25 3.08579 10.9142 2.75 10.5 2.75V3.5ZM10.5 20.5V21.25C10.9142 21.25 11.25 20.9142 11.25 20.5H10.5ZM3.5 20.5H2.75C2.75 20.9142 3.08579 21.25 3.5 21.25V20.5ZM13.5 3.5V2.75C13.0858 2.75 12.75 3.08579 12.75 3.5H13.5ZM20.5 3.5H21.25C21.25 3.08579 20.9142 2.75 20.5 2.75V3.5ZM20.5 20.5V21.25C20.9142 21.25 21.25 20.9142 21.25 20.5H20.5ZM13.5 20.5H12.75C12.75 20.9142 13.0858 21.25 13.5 21.25V20.5ZM3.5 4.25H10.5V2.75H3.5V4.25ZM9.75 3.5V20.5H11.25V3.5H9.75ZM10.5 19.75H3.5V21.25H10.5V19.75ZM4.25 20.5V3.5H2.75V20.5H4.25ZM13.5 4.25H20.5V2.75H13.5V4.25ZM19.75 3.5V20.5H21.25V3.5H19.75ZM20.5 19.75H13.5V21.25H20.5V19.75ZM14.25 20.5V3.5H12.75V20.5H14.25Z" fill={props.fillColor} />
+    <G>
+        <Path d="M3.5 3.5H10.5V20.5H3.5V3.5Z" stroke={props.strokeColor} stroke-width={props.strokeWidth} stroke-linecap="round" stroke-linejoin="round" />
+        <Path d="M13.5 3.5H20.5V20.5H13.5V3.5Z" stroke={props.strokeColor} stroke-width={props.strokeWidth} stroke-linecap="round" stroke-linejoin="round" />
+    </G>
 );
 
 const Grid2Vertical: VFC<Grid2VerticalProps> = (props) => {
     switch (props.variant) {
         case 'broken':
             return <Broken {...props} />;
+        case 'curved':
+            return <Curved {...props} />;
         case 'duotone':
             return <Duotone {...props} />;
         case 'outline':

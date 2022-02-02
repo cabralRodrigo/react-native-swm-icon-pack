@@ -40,13 +40,16 @@ internal class App
 
         Console.WriteLine($"Found {paths.Length} icons with {paths.Select(s => s.Variant).Distinct().Count()} variants.");
 
+        Console.WriteLine();
         Console.WriteLine("Parsing icons.");
         var icons = this.iconParser.Parse(paths);
 
+        Console.WriteLine();
         Console.WriteLine("Generating code.");
         var iconsWithCode = icons.Select(s => (Icon: s, Code: this.iconCodeGenerator.Generate(s))).ToArray();
         var indexCode = this.indexCodeGenerator.Generate(icons);
 
+        Console.WriteLine();
         Console.WriteLine("Saving code.");
         this.codeWriter.WriteIcons(options.OutputFolder, iconsWithCode);
         this.codeWriter.WriteIndex(options.OutputFolder, indexCode);

@@ -1,11 +1,67 @@
 import React, { VFC } from 'react';
-import { Color, Path } from 'react-native-svg';
+import { Color, G, Path } from 'react-native-svg';
 import { createIcon } from '../helpers';
 
-type PinpaperCrossProps = { fillColor: Color, };
+type BrokenProps = { strokeColor: Color, strokeWidth: number, };
+type CurvedProps = { strokeColor: Color, strokeWidth: number, };
+type DuotoneProps = { fillColor: Color, strokeColor: Color, strokeWidth: number, };
+type OutlineProps = { strokeColor: Color, strokeWidth: number, };
 
-const PinpaperCross: VFC<PinpaperCrossProps> = (props) => (
-    <Path d="M15.0303 12.0303C15.3232 11.7374 15.3232 11.2626 15.0303 10.9697C14.7374 10.6768 14.2626 10.6768 13.9697 10.9697L15.0303 12.0303ZM8.96967 15.9697C8.67678 16.2626 8.67678 16.7374 8.96967 17.0303C9.26256 17.3232 9.73744 17.3232 10.0303 17.0303L8.96967 15.9697ZM10.0303 10.9697C9.73744 10.6768 9.26256 10.6768 8.96967 10.9697C8.67678 11.2626 8.67678 11.7374 8.96967 12.0303L10.0303 10.9697ZM13.9697 17.0303C14.2626 17.3232 14.7374 17.3232 15.0303 17.0303C15.3232 16.7374 15.3232 16.2626 15.0303 15.9697L13.9697 17.0303ZM9 3V2.25C8.58579 2.25 8.25 2.58579 8.25 3H9ZM15 3H15.75C15.75 2.58579 15.4142 2.25 15 2.25V3ZM15 6V6.75C15.4142 6.75 15.75 6.41421 15.75 6H15ZM9 6H8.25C8.25 6.41421 8.58579 6.75 9 6.75V6ZM5 4.5V3.75C4.58579 3.75 4.25 4.08579 4.25 4.5H5ZM19 4.5H19.75C19.75 4.08579 19.4142 3.75 19 3.75V4.5ZM18.25 8C18.25 8.41421 18.5858 8.75 19 8.75C19.4142 8.75 19.75 8.41421 19.75 8H18.25ZM4.25 14C4.25 14.4142 4.58579 14.75 5 14.75C5.41421 14.75 5.75 14.4142 5.75 14H4.25ZM19 21V21.75C19.4142 21.75 19.75 21.4142 19.75 21H19ZM5 21H4.25C4.25 21.4142 4.58579 21.75 5 21.75V21ZM19.75 13C19.75 12.5858 19.4142 12.25 19 12.25C18.5858 12.25 18.25 12.5858 18.25 13H19.75ZM5.75 18C5.75 17.5858 5.41421 17.25 5 17.25C4.58579 17.25 4.25 17.5858 4.25 18H5.75ZM13.9697 10.9697L8.96967 15.9697L10.0303 17.0303L15.0303 12.0303L13.9697 10.9697ZM8.96967 12.0303L13.9697 17.0303L15.0303 15.9697L10.0303 10.9697L8.96967 12.0303ZM9 3.75H15V2.25H9V3.75ZM15 5.25H9V6.75H15V5.25ZM9.75 6V4.5H8.25V6H9.75ZM9.75 4.5V3H8.25V4.5H9.75ZM14.25 3V4.5H15.75V3H14.25ZM14.25 4.5V6H15.75V4.5H14.25ZM5 5.25H9V3.75H5V5.25ZM19 3.75H15V5.25H19V3.75ZM18.25 4.5V8H19.75V4.5H18.25ZM5.75 14V4.5H4.25V14H5.75ZM19 20.25H5V21.75H19V20.25ZM18.25 13V21H19.75V13H18.25ZM5.75 21V18H4.25V21H5.75Z" fill={props.fillColor} />
+type PinpaperCrossProps = 
+    { variant: 'broken' } & BrokenProps |
+    { variant: 'curved' } & CurvedProps |
+    { variant: 'duotone' } & DuotoneProps |
+    { variant: 'outline' } & OutlineProps;
+
+const Broken: VFC<BrokenProps> = (props) => (
+    <G>
+        <Path d="M14.5 11.5L9.5 16.5" stroke={props.strokeColor} stroke-width={props.strokeWidth} stroke-linecap="round" stroke-linejoin="round" />
+        <Path d="M9.5 11.5L14.5 16.5" stroke={props.strokeColor} stroke-width={props.strokeWidth} stroke-linecap="round" stroke-linejoin="round" />
+        <Path d="M15 3H9V4.5V6H15V4.5V3Z" stroke={props.strokeColor} stroke-width={props.strokeWidth} stroke-linecap="round" stroke-linejoin="round" />
+        <Path d="M9 4.5H5V14M15 4.5H19V8" stroke={props.strokeColor} stroke-width={props.strokeWidth} stroke-linecap="round" stroke-linejoin="round" />
+        <Path d="M19 13V21H5V18" stroke={props.strokeColor} stroke-width={props.strokeWidth} stroke-linecap="round" stroke-linejoin="round" />
+    </G>
 );
+
+const Curved: VFC<CurvedProps> = (props) => (
+    <G>
+        <Path d="M14.5 11.5L9.5 16.5" stroke={props.strokeColor} stroke-width={props.strokeWidth} stroke-linecap="round" stroke-linejoin="round" />
+        <Path d="M9.5 11.5L14.5 16.5" stroke={props.strokeColor} stroke-width={props.strokeWidth} stroke-linecap="round" stroke-linejoin="round" />
+        <Path d="M9 3H15V4.27928V6H9V4.27928V3Z" stroke={props.strokeColor} stroke-width={props.strokeWidth} stroke-linecap="round" stroke-linejoin="round" />
+        <Path d="M15 4.2793C18.3745 5.04621 19.5 7.5037 19.5 13C19.5 19.8824 17.7353 22 12 22C6.26471 22 4.5 19.8824 4.5 13C4.5 7.5037 5.62549 5.04621 9 4.2793" stroke={props.strokeColor} stroke-width={props.strokeWidth} stroke-linecap="round" stroke-linejoin="round" />
+    </G>
+);
+
+const Duotone: VFC<DuotoneProps> = (props) => (
+    <G>
+        <Path opacity="0.15" d="M19 21V4.5H15V6H9V4.5H5V21H19Z" fill={props.fillColor} />
+        <Path d="M14.5 11.5L9.5 16.5" stroke={props.strokeColor} stroke-width={props.strokeWidth} stroke-linecap="round" stroke-linejoin="round" />
+        <Path d="M9.5 11.5L14.5 16.5" stroke={props.strokeColor} stroke-width={props.strokeWidth} stroke-linecap="round" stroke-linejoin="round" />
+        <Path d="M9 4.5H5V21H19V4.5H15" stroke={props.strokeColor} stroke-width={props.strokeWidth} stroke-linecap="round" stroke-linejoin="round" />
+        <Path d="M15 3H9V4.5V6H15V4.5V3Z" stroke={props.strokeColor} stroke-width={props.strokeWidth} stroke-linecap="round" stroke-linejoin="round" />
+    </G>
+);
+
+const Outline: VFC<OutlineProps> = (props) => (
+    <G>
+        <Path d="M14.5 11.5L9.5 16.5" stroke={props.strokeColor} stroke-width={props.strokeWidth} stroke-linecap="round" stroke-linejoin="round" />
+        <Path d="M9.5 11.5L14.5 16.5" stroke={props.strokeColor} stroke-width={props.strokeWidth} stroke-linecap="round" stroke-linejoin="round" />
+        <Path d="M9 4.5H5V21H19V4.5H15" stroke={props.strokeColor} stroke-width={props.strokeWidth} stroke-linecap="round" stroke-linejoin="round" />
+        <Path d="M15 3H9V4.5V6H15V4.5V3Z" stroke={props.strokeColor} stroke-width={props.strokeWidth} stroke-linecap="round" stroke-linejoin="round" />
+    </G>
+);
+
+const PinpaperCross: VFC<PinpaperCrossProps> = (props) => {
+    switch (props.variant) {
+        case 'broken':
+            return <Broken {...props} />;
+        case 'curved':
+            return <Curved {...props} />;
+        case 'duotone':
+            return <Duotone {...props} />;
+        case 'outline':
+            return <Outline {...props} />;
+    }
+};
 
 export default createIcon(PinpaperCross);

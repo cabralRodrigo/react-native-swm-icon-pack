@@ -1,11 +1,58 @@
 import React, { VFC } from 'react';
-import { Color, Path } from 'react-native-svg';
+import { Color, G, Path } from 'react-native-svg';
 import { createIcon } from '../helpers';
 
-type PowerProps = { fillColor: Color, };
+type BrokenProps = { strokeColor: Color, strokeWidth: number, };
+type CurvedProps = { strokeColor: Color, strokeWidth: number, };
+type DuotoneProps = { strokeColor: Color, strokeWidth: number, };
+type OutlineProps = { strokeColor: Color, strokeWidth: number, };
 
-const Power: VFC<PowerProps> = (props) => (
-    <Path d="M4.25 14C4.25 14.4142 4.58579 14.75 5 14.75C5.41421 14.75 5.75 14.4142 5.75 14H4.25ZM8.42907 8.86982C8.76881 8.63285 8.85211 8.16534 8.61514 7.82561C8.37817 7.48588 7.91066 7.40257 7.57093 7.63955L8.42907 8.86982ZM16.4291 7.63956C16.0893 7.40259 15.6218 7.48589 15.3849 7.82563C15.1479 8.16536 15.2312 8.63287 15.5709 8.86984L16.4291 7.63956ZM7.62594 18.4643C7.33009 18.1744 6.85524 18.1792 6.56533 18.4751C6.27542 18.7709 6.28024 19.2458 6.57609 19.5357L7.62594 18.4643ZM12.75 4C12.75 3.58579 12.4142 3.25 12 3.25C11.5858 3.25 11.25 3.58579 11.25 4H12.75ZM11.25 12C11.25 12.4142 11.5858 12.75 12 12.75C12.4142 12.75 12.75 12.4142 12.75 12H11.25ZM5.75 14C5.75 11.8768 6.80806 10.0005 8.42907 8.86982L7.57093 7.63955C5.56497 9.03874 4.25 11.3657 4.25 14H5.75ZM18.25 14C18.25 17.4518 15.4518 20.25 12 20.25V21.75C16.2802 21.75 19.75 18.2802 19.75 14H18.25ZM15.5709 8.86984C17.1919 10.0005 18.25 11.8768 18.25 14H19.75C19.75 11.3658 18.435 9.03876 16.4291 7.63956L15.5709 8.86984ZM12 20.25C10.2968 20.25 8.75397 19.5697 7.62594 18.4643L6.57609 19.5357C7.97313 20.9047 9.8886 21.75 12 21.75V20.25ZM11.25 4V12H12.75V4H11.25Z" fill={props.fillColor} />
+type PowerProps = 
+    { variant: 'broken' } & BrokenProps |
+    { variant: 'curved' } & CurvedProps |
+    { variant: 'duotone' } & DuotoneProps |
+    { variant: 'outline' } & OutlineProps;
+
+const Broken: VFC<BrokenProps> = (props) => (
+    <G>
+        <Path d="M5 14C5 11.6212 6.18652 9.51963 8 8.25468" stroke={props.strokeColor} stroke-width={props.strokeWidth} stroke-linecap="round" stroke-linejoin="round" />
+        <Path d="M16 8.2547C17.8135 9.51965 19 11.6213 19 14C19 17.866 15.866 21 12 21C10.0927 21 8.36355 20.2372 7.10101 19" stroke={props.strokeColor} stroke-width={props.strokeWidth} stroke-linecap="round" stroke-linejoin="round" />
+        <Path d="M12 4V12" stroke={props.strokeColor} stroke-width={props.strokeWidth} stroke-linecap="round" stroke-linejoin="round" />
+    </G>
 );
+
+const Curved: VFC<CurvedProps> = (props) => (
+    <G>
+        <Path d="M9 7.67363C6.63505 8.79709 5 11.2076 5 14C5 17.866 8.13401 21 12 21C15.866 21 19 17.866 19 14C19 11.2076 17.3649 8.79709 15 7.67363" stroke={props.strokeColor} stroke-width={props.strokeWidth} stroke-linecap="round" stroke-linejoin="round" />
+        <Path d="M12 4V12" stroke={props.strokeColor} stroke-width={props.strokeWidth} stroke-linecap="round" stroke-linejoin="round" />
+    </G>
+);
+
+const Duotone: VFC<DuotoneProps> = (props) => (
+    <G>
+        <Path d="M8 8.25468C6.18652 9.51963 5 11.6212 5 14C5 17.866 8.13401 21 12 21C15.866 21 19 17.866 19 14C19 11.6212 17.8135 9.51963 16 8.25468" stroke={props.strokeColor} stroke-width={props.strokeWidth} stroke-linecap="round" stroke-linejoin="round" />
+        <Path d="M12 4V12" stroke={props.strokeColor} stroke-width={props.strokeWidth} stroke-linecap="round" stroke-linejoin="round" />
+    </G>
+);
+
+const Outline: VFC<OutlineProps> = (props) => (
+    <G>
+        <Path d="M8 8.2547C6.18652 9.51965 5 11.6213 5 14C5 17.866 8.13401 21 12 21C15.866 21 19 17.866 19 14C19 11.6213 17.8135 9.51965 16 8.2547" stroke={props.strokeColor} stroke-width={props.strokeWidth} stroke-linecap="round" stroke-linejoin="round" />
+        <Path d="M12 4V12" stroke={props.strokeColor} stroke-width={props.strokeWidth} stroke-linecap="round" stroke-linejoin="round" />
+    </G>
+);
+
+const Power: VFC<PowerProps> = (props) => {
+    switch (props.variant) {
+        case 'broken':
+            return <Broken {...props} />;
+        case 'curved':
+            return <Curved {...props} />;
+        case 'duotone':
+            return <Duotone {...props} />;
+        case 'outline':
+            return <Outline {...props} />;
+    }
+};
 
 export default createIcon(Power);

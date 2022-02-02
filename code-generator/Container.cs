@@ -13,6 +13,7 @@ namespace CodeGenerator;
 [Register<PathTagTransformer, ISvgTagTransformer>]
 [Register<GroupTagTransformer, ISvgTagTransformer>]
 [Register<SvgAttributeExcludeList, IAttributeExcludeList>]
+[Register<PathAttributeExcludeList, IAttributeExcludeList>]
 [Register<PathAttributePropExtractor, IAttributePropExtractor>]
 [Register<IconCodeGenerator, IIconCodeGenerator>]
 [Register<IndexCodeGenerator, IIndexCodeGenerator>]

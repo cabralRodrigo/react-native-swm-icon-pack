@@ -12,3 +12,10 @@ internal class SvgAttributeExcludeList : IAttributeExcludeList
 
     public string[] Attributes => new[] { "xmlns", "width", "height" };
 }
+
+internal class PathAttributeExcludeList : IAttributeExcludeList
+{
+    public string Tag => "Path";
+
+    public string[] Attributes => new[] { "id" };
+}

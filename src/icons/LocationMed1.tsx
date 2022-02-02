@@ -1,11 +1,63 @@
 import React, { VFC } from 'react';
-import { Color, Path } from 'react-native-svg';
+import { Color, G, Path } from 'react-native-svg';
 import { createIcon } from '../helpers';
 
-type LocationMed1Props = { fillColor: Color, };
+type BrokenProps = { strokeColor: Color, strokeWidth: number, };
+type CurvedProps = { strokeColor: Color, strokeWidth: number, };
+type DuotoneProps = { fillColor: Color, strokeColor: Color, strokeWidth: number, };
+type OutlineProps = { strokeColor: Color, strokeWidth: number, };
 
-const LocationMed1: VFC<LocationMed1Props> = (props) => (
-    <Path d="M11.6907 20.3167C11.3134 20.4876 11.1459 20.9319 11.3167 21.3093C11.4876 21.6866 11.9319 21.8541 12.3093 21.6833L11.6907 20.3167ZM6.8837 18.5496C7.18724 18.8315 7.66179 18.8139 7.94363 18.5103C8.22548 18.2068 8.20789 17.7322 7.90435 17.4504L6.8837 18.5496ZM12.75 7.5C12.75 7.08579 12.4142 6.75 12 6.75C11.5858 6.75 11.25 7.08579 11.25 7.5H12.75ZM11.25 14.5C11.25 14.9142 11.5858 15.25 12 15.25C12.4142 15.25 12.75 14.9142 12.75 14.5H11.25ZM8.5 10.25C8.08579 10.25 7.75 10.5858 7.75 11C7.75 11.4142 8.08579 11.75 8.5 11.75V10.25ZM10 11.75C10.4142 11.75 10.75 11.4142 10.75 11C10.75 10.5858 10.4142 10.25 10 10.25V11.75ZM12 10.25C11.5858 10.25 11.25 10.5858 11.25 11C11.25 11.4142 11.5858 11.75 12 11.75V10.25ZM15.5 11.75C15.9142 11.75 16.25 11.4142 16.25 11C16.25 10.5858 15.9142 10.25 15.5 10.25V11.75ZM19.25 11C19.25 14.982 15.9996 18.3663 11.6907 20.3167L12.3093 21.6833C16.837 19.6337 20.75 15.8545 20.75 11H19.25ZM4.75 11C4.75 6.99594 7.99594 3.75 12 3.75V2.25C7.16751 2.25 3.25 6.16751 3.25 11H4.75ZM12 3.75C16.0041 3.75 19.25 6.99594 19.25 11H20.75C20.75 6.16751 16.8325 2.25 12 2.25V3.75ZM7.90435 17.4504C5.95667 15.6419 4.75 13.4379 4.75 11H3.25C3.25 13.969 4.72526 16.5454 6.8837 18.5496L7.90435 17.4504ZM11.25 7.5V14.5H12.75V7.5H11.25ZM8.5 11.75H10V10.25H8.5V11.75ZM12 11.75H15.5V10.25H12V11.75Z" fill={props.fillColor} />
+type LocationMed1Props = 
+    { variant: 'broken' } & BrokenProps |
+    { variant: 'curved' } & CurvedProps |
+    { variant: 'duotone' } & DuotoneProps |
+    { variant: 'outline' } & OutlineProps;
+
+const Broken: VFC<BrokenProps> = (props) => (
+    <G>
+        <Path d="M12 21C16.4183 19 20 15.4183 20 11C20 6.58172 16.4183 3 12 3C7.58172 3 4 6.58172 4 11C4 13.7034 5.34096 16.0937 7.39403 18" stroke={props.strokeColor} stroke-width={props.strokeWidth} stroke-linecap="round" stroke-linejoin="round" />
+        <Path d="M12 7.5V14.5" stroke={props.strokeColor} stroke-width={props.strokeWidth} stroke-linecap="round" stroke-linejoin="round" />
+        <Path d="M8.5 11H10" stroke={props.strokeColor} stroke-width={props.strokeWidth} stroke-linecap="round" stroke-linejoin="round" />
+        <Path d="M12 11H15.5" stroke={props.strokeColor} stroke-width={props.strokeWidth} stroke-linecap="round" stroke-linejoin="round" />
+    </G>
 );
+
+const Curved: VFC<CurvedProps> = (props) => (
+    <G>
+        <Path d="M12.8159 20.6077C16.8509 18.5502 20 15.1429 20 11C20 6.58172 16.4183 3 12 3C7.58172 3 4 6.58172 4 11C4 15.1429 7.14909 18.5502 11.1841 20.6077C11.6968 20.8691 12.3032 20.8691 12.8159 20.6077Z" stroke={props.strokeColor} stroke-width={props.strokeWidth} stroke-linecap="round" stroke-linejoin="round" />
+        <Path d="M8.5 11L15.5 11" stroke={props.strokeColor} stroke-width={props.strokeWidth} stroke-linecap="round" stroke-linejoin="round" />
+        <Path d="M12 7.5V14.5" stroke={props.strokeColor} stroke-width={props.strokeWidth} stroke-linecap="round" stroke-linejoin="round" />
+    </G>
+);
+
+const Duotone: VFC<DuotoneProps> = (props) => (
+    <G>
+        <Path opacity="0.15" d="M20 11C20 15.4183 16.4183 19 12 21C7.58172 19 4 15.4183 4 11C4 6.58172 7.58172 3 12 3C16.4183 3 20 6.58172 20 11Z" fill={props.fillColor} />
+        <Path d="M12 21C16.4183 19 20 15.4183 20 11C20 6.58172 16.4183 3 12 3C7.58172 3 4 6.58172 4 11C4 15.4183 7.58172 19 12 21Z" stroke={props.strokeColor} stroke-width={props.strokeWidth} stroke-linecap="round" stroke-linejoin="round" />
+        <Path d="M12 7.5V14.5" stroke={props.strokeColor} stroke-width={props.strokeWidth} stroke-linecap="round" stroke-linejoin="round" />
+        <Path d="M8.5 11L15.5 11" stroke={props.strokeColor} stroke-width={props.strokeWidth} stroke-linecap="round" stroke-linejoin="round" />
+    </G>
+);
+
+const Outline: VFC<OutlineProps> = (props) => (
+    <G>
+        <Path d="M12 21C16.4183 19 20 15.4183 20 11C20 6.58172 16.4183 3 12 3C7.58172 3 4 6.58172 4 11C4 15.4183 7.58172 19 12 21Z" stroke={props.strokeColor} stroke-width={props.strokeWidth} stroke-linecap="round" stroke-linejoin="round" />
+        <Path d="M12 7.5V14.5" stroke={props.strokeColor} stroke-width={props.strokeWidth} stroke-linecap="round" stroke-linejoin="round" />
+        <Path d="M8.5 11L15.5 11" stroke={props.strokeColor} stroke-width={props.strokeWidth} stroke-linecap="round" stroke-linejoin="round" />
+    </G>
+);
+
+const LocationMed1: VFC<LocationMed1Props> = (props) => {
+    switch (props.variant) {
+        case 'broken':
+            return <Broken {...props} />;
+        case 'curved':
+            return <Curved {...props} />;
+        case 'duotone':
+            return <Duotone {...props} />;
+        case 'outline':
+            return <Outline {...props} />;
+    }
+};
 
 export default createIcon(LocationMed1);
