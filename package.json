@@ -1,6 +1,6 @@
 {
   "name": "react-native-swm-icon-pack",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "React native components for SWM icons",
   "scripts": {
     "code-gen": "dotnet run --project ./code-generator/CodeGenerator.csproj -- -f ./icons -o ./src/icons",
@@ -41,7 +41,7 @@
   },
   "devDependencies": {
     "@types/react": "^17.0.38",
-    "@types/react-native": "^0.66.15",
-    "typescript": "^4.5.5"
+    "@types/react-native": "^0.67.7",
+    "typescript": "^4.7.2"
   }
 }
