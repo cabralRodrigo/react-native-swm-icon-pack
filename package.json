@@ -1,6 +1,6 @@
 {
   "name": "react-native-swm-icon-pack",
-  "version": "1.0.4",
+  "version": "1.1.0",
   "description": "React native components for SWM icons",
   "scripts": {
     "code-gen": "dotnet run --project ./code-generator/CodeGenerator.csproj -- -f ./icons -o ./src/icons",
